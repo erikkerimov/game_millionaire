@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kursovaya
 {
-    static class data_program
+    public static class data_program
     {
         public static string game_name;
         public static int summa_nesgor;

@@ -10,6 +10,11 @@ using System.Windows.Forms;
 
 namespace Kursovaya
 {
+    public class ResourceMessage
+    {
+        public const string WinGame = "Поздравляем, вы победили!";
+        public const string LoseGame = "Вы проиграли! Не огорчайтесь!";
+    }
     public partial class End : Form
     {
         public End()
@@ -18,11 +23,11 @@ namespace Kursovaya
             label1.Text = data_program.Message[0];
             label2.Text += " " + data_program.Message[1];
             label3.Text += " " + data_program.Message[2];
-            if (data_program.Message[0] == "Вы проиграли! Не огорчайтесь!")
+            if (data_program.Message[0] == ResourceMessage.WinGame)
             {
                 label1.ForeColor = ColorTranslator.FromHtml("#ff0000");
             }
-            if (data_program.Message[0] == "Поздравляем, вы победили!")
+            if (data_program.Message[0] == ResourceMessage.LoseGame)
             {
                 label1.ForeColor = ColorTranslator.FromHtml("#00ff45");
             }
@@ -32,7 +37,7 @@ namespace Kursovaya
         {
             this.Hide();
             this.Owner.Hide();
-            Form F1 = new Form1();
+            var F1 = new Form1();
             F1.Show();
         }
 

@@ -5,19 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kursovaya
+namespace Kursovaya.DatabaseConnections
 {
-    class BD
+    public class DatabaseMySQLConnection
     {
         MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root;database=db_millioner");
 
         public void OpenConnection()
         {
-            if(connection.State==System.Data.ConnectionState.Closed)
+            if (connection.State == System.Data.ConnectionState.Closed)
             {
                 connection.Open();
             }
         }
+
         public void CloseConnection()
         {
             if (connection.State == System.Data.ConnectionState.Open)
@@ -25,7 +26,8 @@ namespace Kursovaya
                 connection.Close();
             }
         }
-        public MySqlConnection getConnection()
+
+        public MySqlConnection GetConnection()
         {
             return connection;
         }

@@ -16,15 +16,15 @@ using System.Reflection.Emit;
 using System.Media;
 using Kursovaya.Properties;
 using System.Windows.Forms.VisualStyles;
+using Kursovaya.DatabaseConnections;
 
 namespace Kursovaya
 {
-
     public partial class Form2 : Form
     {
         private Point lastPoint;
         private Random rnd = new Random();
-        private BD bd = new BD();
+        private DatabaseMySQLConnection bd = new DatabaseMySQLConnection();
         private int current_question = 0;
         private int balance = 0;
         private List<string[]> data = new List<string[]>();
@@ -49,36 +49,29 @@ namespace Kursovaya
             }
         }
 
+        private IDatabaseProvider _dbProvider;
+
         public Form2()
         {
             InitializeComponent();
-            game_sound();
-            label2.Text = "Несгораемая сумма: " + data_program.summa_nesgor;
-            bd.OpenConnection();
-            DataTable table = new DataTable();
-            MySqlCommand command = new MySqlCommand("SELECT * FROM game_data WHERE Name = @N", bd.getConnection());
-            command.Parameters.Add("@N", MySqlDbType.VarChar).Value = data_program.game_name;
-            MySqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                data.Add(new string[7]);
+            InitializeGame();
 
-                data[data.Count - 1][0] = reader[0].ToString();
-                data[data.Count - 1][1] = reader[1].ToString();
-                data[data.Count - 1][2] = reader[2].ToString();
-                data[data.Count - 1][3] = reader[3].ToString();
-                data[data.Count - 1][4] = reader[4].ToString();
-                data[data.Count - 1][5] = reader[5].ToString();
-                data[data.Count - 1][6] = reader[6].ToString();
-            }
-            reader.Close();
-            first_quest();
+            StartGame();
         }
-        private async Task first_quest()
+
+        private void InitializeGame()
+        {
+            _dbProvider = new DatabaseMySQLProvider(bd);
+            data = _dbProvider.GetGameData();
+            InitializeSounds();
+            label2.Text = "Несгораемая сумма: " + data_program.summa_nesgor;
+        }
+
+        private async Task StartGame()
         {
             debrov("Добро пожаловать в игру!");
             start_game.Play();
-            button_enabled(false);
+            ChangeStateButton(false);
             button_question.Text = data[0][1];
             await Task.Delay(TimeSpan.FromSeconds(1));
             button_A.Text = data[0][2];
@@ -88,7 +81,7 @@ namespace Kursovaya
             button_C.Text = data[0][4];
             await Task.Delay(TimeSpan.FromSeconds(1));
             button_D.Text = data[0][5];
-            button_enabled(true);
+            ChangeStateButton(true);
         } // ОБРАБОТКА ПЕРВОГО ВОПРОСА
         private void Form2_MouseMove(object sender, MouseEventArgs e)
         {
@@ -107,14 +100,13 @@ namespace Kursovaya
             await Task.Delay(TimeSpan.FromSeconds(4));
             if (but.Text == data[current_question][6])
             {
-
                 current_question++;
                 if (current_question == data.Count)
                 {
                     green_button(but, false);
                     await Task.Delay(TimeSpan.FromSeconds(2));
-                    game_Update();
-                    button_enabled(true);
+                    UpdateBalance();
+                    ChangeStateButton(true);
                     good_finish();
                 }
                 else
@@ -132,9 +124,9 @@ namespace Kursovaya
                         x2_active.Visible = false;
                     }
                     label1.Text = "Вопрос " + (current_question + 1) + " / 15";
-                    game_Update();
+                    UpdateBalance();
                     button_question.Text = data[current_question][1];
-                    button_enabled(false);
+                    ChangeStateButton(false);
                     await Task.Delay(TimeSpan.FromSeconds(1));
                     button_A.Text = data[current_question][2];
                     await Task.Delay(TimeSpan.FromSeconds(1));
@@ -143,26 +135,26 @@ namespace Kursovaya
                     button_C.Text = data[current_question][4];
                     await Task.Delay(TimeSpan.FromSeconds(1));
                     button_D.Text = data[current_question][5];
-                    button_enabled(true);
+                    ChangeStateButton(true);
                 }
             }
             else
             {
                 debrov("К сожалению игра закончена, мне жаль!");
                 false_answer.Play();
-                Button true_b = checked_true_button(data[current_question][6]);
+                var true_b = checked_true_button(data[current_question][6]);
                 game_over(true_b, but);
             }
         }
         private async void next_quest(object sender, EventArgs e) // СОБЫТИЕ КЛИКА ПО КНОПКЕ
         {
             otvet.Play();
-            Button but = sender as Button;
+            var but = sender as Button;
             btn_focus.Focus();
             but.BackColor = ColorTranslator.FromHtml("#a46400");
             but.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#a46400");
             but.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#a46400");
-            button_enabled(false);
+            ChangeStateButton(false);
             if (but == button_A)
             {
                 pictureBox1.Image = Game_Pict.game_cap_select_a;
@@ -182,21 +174,21 @@ namespace Kursovaya
             debrov("Внимание...");
             await Continuation(but);
         }
-        private void button_enabled(bool enable) // ОТКЛЮЧЕНИЕ ВСЕХ КНОПОК ВО ВРЕМЯ ПРОВЕРКИ ПРАВИЛЬНОСТИ ВОПРОСА
+        private void ChangeStateButton(bool enable) // ОТКЛЮЧЕНИЕ ВСЕХ КНОПОК ВО ВРЕМЯ ПРОВЕРКИ ПРАВИЛЬНОСТИ ВОПРОСА
         {
             if (enable == false)
             {
-                this.button_A.Click -= new System.EventHandler(this.next_quest);
-                this.button_B.Click -= new System.EventHandler(this.next_quest);
-                this.button_C.Click -= new System.EventHandler(this.next_quest);
-                this.button_D.Click -= new System.EventHandler(this.next_quest);
+                this.button_A.Click -= new System.EventHandler(next_quest);
+                this.button_B.Click -= new System.EventHandler(next_quest);
+                this.button_C.Click -= new System.EventHandler(next_quest);
+                this.button_D.Click -= new System.EventHandler(next_quest);
             }
             else
             {
-                this.button_A.Click += new System.EventHandler(this.next_quest);
-                this.button_B.Click += new System.EventHandler(this.next_quest);
-                this.button_C.Click += new System.EventHandler(this.next_quest);
-                this.button_D.Click += new System.EventHandler(this.next_quest);
+                this.button_A.Click += new System.EventHandler(next_quest);
+                this.button_B.Click += new System.EventHandler(next_quest);
+                this.button_C.Click += new System.EventHandler(next_quest);
+                this.button_D.Click += new System.EventHandler(next_quest);
             }
             button_50na50.Enabled = enable;
             button_zall.Enabled = enable;
@@ -288,7 +280,7 @@ namespace Kursovaya
             button_zall.Enabled = false;
             button_50na50.Enabled = false;
             on50.Play();
-            Button true_b = checked_true_button(data[current_question][6]);
+            var true_b = checked_true_button(data[current_question][6]);
             int true_c = 0;
             if (true_b == button_A)
             {
@@ -399,7 +391,7 @@ namespace Kursovaya
             label4.BringToFront();
             label5.Hide();
             pictureBox5.Hide();
-            Button true_b = checked_true_button(data[current_question][6]);
+            var true_b = checked_true_button(data[current_question][6]);
             if (true_b == button_A)
             {
                 label4.Text = "A";
@@ -453,8 +445,14 @@ namespace Kursovaya
             }
             label15.Visible = false;
             label14.Visible = true;
-            label6.Visible = true; label7.Visible = true; label8.Visible = true; label9.Visible = true;
-            label10.Visible = true; label11.Visible = true; label12.Visible = true; label13.Visible = true;
+            label6.Visible = true;
+            label7.Visible = true;
+            label8.Visible = true;
+            label9.Visible = true;
+            label10.Visible = true;
+            label11.Visible = true;
+            label12.Visible = true;
+            label13.Visible = true;
         }
         private void button_zall_Click(object sender, EventArgs e)
         {
@@ -496,7 +494,7 @@ namespace Kursovaya
                 }
             }
 
-            Button true_b = checked_true_button(data[current_question][6]);
+            var true_b = checked_true_button(data[current_question][6]);
             if (true_b == button_A)
             {
                 LB = label10;
@@ -539,7 +537,7 @@ namespace Kursovaya
                 label12.Text = "думает " + x4.ToString() + "% людей";
             }
         }
-        private void game_Update()
+        private void UpdateBalance()
         {
             balance = _balanceManager.GetNext();
             label3.Text = "Баланс: " + balance.ToString();
@@ -548,14 +546,15 @@ namespace Kursovaya
         {
             if (balance > data_program.summa_nesgor)
             {
-                data_program.Message[0] = "Вы проиграли! Не огорчайтесь!";
+                
+                data_program.Message[0] = ResourceMessage.LoseGame;
                 data_program.Message[1] = data_program.game_name;
                 data_program.Message[2] = data_program.summa_nesgor.ToString();
             }
             if (current_question == data.Count)
             {
                 win.Play();
-                data_program.Message[0] = "Поздравляем, вы победили!";
+                data_program.Message[0] = ResourceMessage.WinGame;
                 data_program.Message[1] = data_program.game_name;
                 data_program.Message[2] = balance.ToString();
             }
@@ -566,7 +565,7 @@ namespace Kursovaya
         {
             if (x2_active.Visible == true)
             {
-                button_enabled(true);
+                ChangeStateButton(true);
                 select_button.BackColor = ColorTranslator.FromHtml("#180246");
                 select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#180246");
                 select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#180246");
@@ -649,7 +648,7 @@ namespace Kursovaya
                     select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
                     select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                 }
-                data_program.Message[0] = "Вы проиграли! Не огорчайтесь!";
+                data_program.Message[0] = ResourceMessage.LoseGame;
                 data_program.Message[1] = data_program.game_name;
                 if (balance > data_program.summa_nesgor)
                 {
@@ -663,7 +662,7 @@ namespace Kursovaya
                 FG.ShowDialog(this);
             }
         }
-        private void game_sound()
+        private void InitializeSounds()
         {
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             System.IO.Stream resourceStream_start = assembly.GetManifestResourceStream(@"Kursovaya.start_game.wav");

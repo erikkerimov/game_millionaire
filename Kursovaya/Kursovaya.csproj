@@ -50,11 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BD.cs" />
+    <Compile Include="DatabaseConnections\BD.cs" />
+    <Compile Include="DatabaseConnections\DatabaseMySQLProvider.cs" />
+    <Compile Include="DatabaseConnections\IDatabaseProvider.cs" />
     <Compile Include="data_program.cs" />
-    <Compile Include="End.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="End.cs" />
     <Compile Include="End.Designer.cs">
       <DependentUpon>End.cs</DependentUpon>
     </Compile>

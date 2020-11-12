@@ -115,7 +115,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(351, 28);
             this.label1.TabIndex = 25;
-            this.label1.Text = "Поздравляем, вы победили!";
+            this.label1.Text = ResourceMessage.WinGame;
             // 
             // End
             // 
