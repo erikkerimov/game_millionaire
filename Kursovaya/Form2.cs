@@ -22,20 +22,32 @@ namespace Kursovaya
 
     public partial class Form2 : Form
     {
-        Point lastPoint;
-        Random rnd = new Random();
-        BD bd = new BD();
-        int current_question = 0; 
-        int balans = 0;
-        List<string[]> data = new List<string[]>();
-        SoundPlayer start_game;
-        SoundPlayer otvet;
-        SoundPlayer false_answer;
-        SoundPlayer on50;
-        SoundPlayer sms;
-        SoundPlayer true_answer;
-        SoundPlayer phone;
-        SoundPlayer win;
+        private Point lastPoint;
+        private Random rnd = new Random();
+        private BD bd = new BD();
+        private int current_question = 0;
+        private int balance = 0;
+        private List<string[]> data = new List<string[]>();
+        private SoundPlayer start_game;
+        private SoundPlayer otvet;
+        private SoundPlayer false_answer;
+        private SoundPlayer on50;
+        private SoundPlayer sms;
+        private SoundPlayer true_answer;
+        private SoundPlayer phone;
+        private SoundPlayer win;
+        private BanalceManager _balanceManager = new BanalceManager();
+
+        public class BanalceManager
+        {
+            private List<int> _amount = new List<int> { 0, 500, 1000, 2000, 3000, 4000, 5000, 10000, 15000, 25000, 50000, 100_000, 200_000, 400_000, 800_000, 1_500_000, 3_000_000 };
+            private byte index = 0;
+
+            public int GetNext()
+            {
+                return _amount[++index];
+            }
+        }
 
         public Form2()
         {
@@ -215,11 +227,11 @@ namespace Kursovaya
         private Button checked_true_button(string quest) // ПРОВЕРКА В КАКОЙ КНОПКЕ ПРАВИЛЬНЫЙ ОТВЕТ
         {
             Button true_button = new Button();
-            if(button_A.Text == quest)
+            if (button_A.Text == quest)
             {
                 true_button = button_A;
             }
-            if(button_B.Text == quest)
+            if (button_B.Text == quest)
             {
                 true_button = button_B;
             }
@@ -278,30 +290,30 @@ namespace Kursovaya
             on50.Play();
             Button true_b = checked_true_button(data[current_question][6]);
             int true_c = 0;
-            if(true_b==button_A)
+            if (true_b == button_A)
             {
                 true_c = 1;
             }
-            else if(true_b==button_B)
+            else if (true_b == button_B)
             {
                 true_c = 2;
             }
-            else if(true_b==button_C)
+            else if (true_b == button_C)
             {
                 true_c = 3;
             }
-            else if(true_b==button_D)
+            else if (true_b == button_D)
             {
                 true_c = 4;
             }
 
-            while(true)
+            while (true)
             {
                 int random_c = rnd.Next(1, 5);
                 int random_c2 = rnd.Next(1, 5);
-                if(random_c != true_c && random_c2 != true_c && random_c != random_c2)
+                if (random_c != true_c && random_c2 != true_c && random_c != random_c2)
                 {
-                    switch(random_c)
+                    switch (random_c)
                     {
                         case 1:
                             {
@@ -364,7 +376,7 @@ namespace Kursovaya
             {
                 panel1.Visible = false;
             }
-            if(x2_active.Visible == true)
+            if (x2_active.Visible == true)
             {
                 x2_active.Visible = false;
             }
@@ -376,7 +388,7 @@ namespace Kursovaya
             for (int i = 0; i < 6; i++)
             {
                 label5.Text += ".";
-                if(label5.Text == "Вызов....")
+                if (label5.Text == "Вызов....")
                 {
                     label5.Text = "Вызов";
                 }
@@ -465,15 +477,15 @@ namespace Kursovaya
             int x1, x2, x3, x4;
             System.Windows.Forms.Label LB = new System.Windows.Forms.Label();
             x1 = rnd.Next(50, 90);
-            x2 = rnd.Next(1, 100-x1);
-            if(x1 + x2 >= 100)
+            x2 = rnd.Next(1, 100 - x1);
+            if (x1 + x2 >= 100)
             {
                 x3 = 0;
                 x4 = 0;
             }
             else
             {
-                x3 = rnd.Next(1, 100-(x1+x2));
+                x3 = rnd.Next(1, 100 - (x1 + x2));
                 if (x1 + x2 + x3 >= 100)
                 {
                     x4 = 0;
@@ -502,25 +514,25 @@ namespace Kursovaya
                 LB = label13;
             }
             LB.Text = "думает " + x1.ToString() + "% людей";
-            if(LB == label10)
+            if (LB == label10)
             {
                 label11.Text = "думает " + x2.ToString() + "% людей";
                 label12.Text = "думает " + x3.ToString() + "% людей";
                 label13.Text = "думает " + x4.ToString() + "% людей";
             }
-            if(LB == label11)
+            if (LB == label11)
             {
                 label10.Text = "думает " + x2.ToString() + "% людей";
                 label12.Text = "думает " + x3.ToString() + "% людей";
                 label13.Text = "думает " + x4.ToString() + "% людей";
             }
-            if(LB == label12)
+            if (LB == label12)
             {
                 label11.Text = "думает " + x2.ToString() + "% людей";
                 label10.Text = "думает " + x3.ToString() + "% людей";
                 label13.Text = "думает " + x4.ToString() + "% людей";
             }
-            if(LB == label13)
+            if (LB == label13)
             {
                 label11.Text = "думает " + x2.ToString() + "% людей";
                 label10.Text = "думает " + x3.ToString() + "% людей";
@@ -529,71 +541,12 @@ namespace Kursovaya
         }
         private void game_Update()
         {
-            if(balans==0)
-            {
-                balans = 500;
-            }
-            else if(balans == 500)
-            {
-                balans = 1000;
-            }
-            else if(balans==1000)
-            {
-                balans = 2000;
-            }
-            else if (balans == 2000)
-            {
-                balans = 3000;
-            }
-            else if (balans == 3000)
-            {
-                balans = 5000;
-            }
-            else if(balans == 5000)
-            {
-                balans = 10000;
-            }
-            else if (balans == 10000)
-            {
-                balans = 15000;
-            }
-            else if(balans == 15000)
-            {
-                balans = 25000;
-            }
-            else if (balans == 25000)
-            {
-                balans = 50000;
-            }
-            else if (balans == 50000)
-            {
-                balans = 100000;
-            }
-            else if (balans == 100000)
-            {
-                balans = 200000;
-            }
-            else if (balans == 200000)
-            {
-                balans = 400000;
-            }
-            else if (balans == 400000)
-            {
-                balans = 800000;
-            }
-            else if (balans == 800000)
-            {
-                balans = 1500000;
-            }
-            else if (balans == 1500000)
-            {
-                balans = 3000000;
-            }
-            label3.Text = "Баланс: " + balans.ToString();
+            balance = _balanceManager.GetNext();
+            label3.Text = "Баланс: " + balance.ToString();
         }
         private void good_finish()
         {
-            if (balans > data_program.summa_nesgor)
+            if (balance > data_program.summa_nesgor)
             {
                 data_program.Message[0] = "Вы проиграли! Не огорчайтесь!";
                 data_program.Message[1] = data_program.game_name;
@@ -604,7 +557,7 @@ namespace Kursovaya
                 win.Play();
                 data_program.Message[0] = "Поздравляем, вы победили!";
                 data_program.Message[1] = data_program.game_name;
-                data_program.Message[2] = balans.ToString();
+                data_program.Message[2] = balance.ToString();
             }
             End FG = new End();
             FG.ShowDialog(this);
@@ -629,100 +582,76 @@ namespace Kursovaya
                     if (select_button == button_B)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_a_true_b_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_C)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_a_true_c_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_D)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_a_true_d_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
+                    select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
+                    select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
+                    select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                 }
                 if (true_button == button_B)
                 {
                     if (select_button == button_A)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_b_true_a_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_C)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_b_true_c_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_D)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_b_true_d_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
+                    select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
+                    select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
+                    select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                 }
                 if (true_button == button_C)
                 {
                     if (select_button == button_A)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_c_true_a_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_B)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_c_true_b_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_D)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_c_true_d_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
+                    select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
+                    select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
+                    select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                 }
                 if (true_button == button_D)
                 {
                     if (select_button == button_A)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_d_true_a_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_B)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_d_true_b_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_C)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_d_true_c_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
+                    select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
+                    select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
+                    select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                 }
                 data_program.Message[0] = "Вы проиграли! Не огорчайтесь!";
                 data_program.Message[1] = data_program.game_name;
-                if (balans > data_program.summa_nesgor)
+                if (balance > data_program.summa_nesgor)
                 {
                     data_program.Message[2] = data_program.summa_nesgor.ToString();
                 }
@@ -758,7 +687,7 @@ namespace Kursovaya
         {
             debrov_text.Text = Message;
             debrov_text.Show();
-            for(int i = 0;  i < 20; i++)
+            for (int i = 0; i < 20; i++)
             {
                 vedushiy.Image = Resources.rot_false;
                 await Task.Delay(TimeSpan.FromSeconds(0.1));
