@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7DF412B9-E984-4EDE-B56B-56C4C1B7A72C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Kursovaya</RootNamespace>
+    <AssemblyName>Kursovaya</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.10.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.10.9\Assemblies\v4.5.2\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BD.cs" />
+    <Compile Include="data_program.cs" />
+    <Compile Include="End.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="End.Designer.cs">
+      <DependentUpon>End.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form3.Designer.cs">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form4.Designer.cs">
+      <DependentUpon>Form4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form5.Designer.cs">
+      <DependentUpon>Form5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form6.Designer.cs">
+      <DependentUpon>Form6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Game_Pict.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Game_Pict.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="End.resx">
+      <DependentUpon>End.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3.resx">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form4.resx">
+      <DependentUpon>Form4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form5.resx">
+      <DependentUpon>Form5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form6.resx">
+      <DependentUpon>Form6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Game_Pict.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Game_Pict.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\Game.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\made.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\Cap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\krest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_50_50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_call.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_friend.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\svernut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\Next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_x2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\Back.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\result_clipboard_check_mark_icon_153913.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browser-with-check-mark_icon-icons.com_55619.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browser-with-check-mark_icon-icons.com_55619 %281%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkmark_83735.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\accept_check_checklist_circle_mark_ok_yes_icon_123225.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check_mark_circle_icon_125343.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_a.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_a_true.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_b_true.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_c_true.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_d_true.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_a_true_b_false.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_a_true_c_false.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_a_true_d_false.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_b_true_d_false.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_b_true_c_false.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_b_true_a_false.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_d_true_c_false.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_d_true_b_false.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_d_true_a_false.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_c_true_d_false.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_c_true_b_false.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\game_cap_select_c_true_a_false.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\mobilka.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\mobilka_goodki.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\menu.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="50_on_50.wav" />
+    <EmbeddedResource Include="sms.wav" />
+    <EmbeddedResource Include="false_answer.wav" />
+    <EmbeddedResource Include="otvet.wav" />
+    <EmbeddedResource Include="start_game.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="soundtrack.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="true_answ.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="phone.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="winner.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rot_false.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rot_true.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\oblako.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
