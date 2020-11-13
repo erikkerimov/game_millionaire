@@ -93,7 +93,6 @@ namespace Kursovaya
                             break;
                         }
                 }
-
                 Form2 F2 = new Form2();
                 F2.Show();
                 this.Hide();

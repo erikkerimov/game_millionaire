@@ -14,12 +14,12 @@ namespace Kursovaya
 {
     public partial class Form1 : Form
     {
+        SoundPlayer soundtrack;
         public Form1()
         {
             InitializeComponent();
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             System.IO.Stream resourceStream_track = assembly.GetManifestResourceStream(@"Kursovaya.soundtrack.wav");
-            SoundPlayer soundtrack;
             soundtrack = new SoundPlayer(resourceStream_track);
             soundtrack.PlayLooping();
         }

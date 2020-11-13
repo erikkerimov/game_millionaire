@@ -64,8 +64,8 @@ namespace Kursovaya
         }
         private async Task first_quest()
         {
-            debrov("Добро пожаловать в игру!");
             start_game.Play();
+            debrov("Добро пожаловать в игру!");
             button_enabled(false);
             button_question.Text = data[0][1];
             await Task.Delay(TimeSpan.FromSeconds(1));
@@ -92,7 +92,7 @@ namespace Kursovaya
         } // ФУНКЦИЯ ДВИЖЕНИЯ ОКНА
         private async Task Continuation(Button but) // ПРОДОЛЖЕНИЕ ЛОГИКИ ПОСЛЕ МЕТОДА NEXT_QUEST
         {
-            await Task.Delay(TimeSpan.FromSeconds(4));
+            //await Task.Delay(TimeSpan.FromSeconds(4));
             if (but.Text == data[current_question][6])
             {
 
@@ -107,9 +107,8 @@ namespace Kursovaya
                 }
                 else
                 {
-                    debrov("Следующий вопрос..");
-                    green_button(but, false);
-                    await Task.Delay(TimeSpan.FromSeconds(2));
+                    await green_button(but, false);
+                    await debrov("Следующий вопрос..");
                     button_reset(but);
                     if (panel1.Visible == true)
                     {
@@ -167,8 +166,8 @@ namespace Kursovaya
             {
                 pictureBox1.Image = Game_Pict.game_cap_select_d;
             }
-            debrov("Внимание...");
-            await Continuation(but);
+            await debrov("Внимание...");
+            Continuation(but);
         }
         private void button_enabled(bool enable) // ОТКЛЮЧЕНИЕ ВСЕХ КНОПОК ВО ВРЕМЯ ПРОВЕРКИ ПРАВИЛЬНОСТИ ВОПРОСА
         {
@@ -233,13 +232,8 @@ namespace Kursovaya
             }
             return true_button;
         }
-        private void green_button(Button but, bool game_over) // ОКРАС КНОПКИ В ЗЕЛЕНЫЙ ЦВЕТ
+        private async Task green_button(Button but, bool game_over) // ОКРАС КНОПКИ В ЗЕЛЕНЫЙ ЦВЕТ
         {
-            if (game_over == false)
-            {
-                debrov("Это правильный ответ!");
-                true_answer.Play();
-            }
             but.BackColor = ColorTranslator.FromHtml("#08ac00");
             but.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#08ac00");
             but.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#08ac00");
@@ -259,6 +253,12 @@ namespace Kursovaya
             {
                 pictureBox1.Image = Game_Pict.game_cap_select_d_true;
             }
+            if (game_over == false)
+            {   
+                true_answer.Play();
+                await debrov("Это правильный ответ!");
+                
+            }
         }
         private void pictureBox2_Click(object sender, EventArgs e)
         {
@@ -268,9 +268,8 @@ namespace Kursovaya
         {
             this.WindowState = FormWindowState.Minimized;
         } // КНОПКА СВОРАЧИВАНИЯ
-        private void button_50na50_Click(object sender, EventArgs e)
+        private async void button_50na50_Click(object sender, EventArgs e)
         {
-            debrov("Шансы 50 на 50!");
             button_call.Enabled = false;
             button_x2.Enabled = false;
             button_zall.Enabled = false;
@@ -351,6 +350,9 @@ namespace Kursovaya
                 }
             }
             button_50na50.Visible = false;
+            button_enabled(false);
+            await debrov("Шансы 50 на 50!");
+            button_enabled(true);
         }
         private async void button_call_Click(object sender, EventArgs e)
         {
@@ -373,6 +375,7 @@ namespace Kursovaya
             await Task.Delay(TimeSpan.FromSeconds(0.01));
             label5.Show();
             label5.BringToFront();
+            button_enabled(false);
             for (int i = 0; i < 6; i++)
             {
                 label5.Text += ".";
@@ -404,10 +407,10 @@ namespace Kursovaya
             {
                 label4.Text = "D";
             }
+            button_enabled(true);
         }
-        private void button_x2_Click(object sender, EventArgs e)
+        private async void button_x2_Click(object sender, EventArgs e)
         {
-            debrov("У вас есть право на ошибку!");
             on50.Play();
             button_call.Enabled = false;
             button_x2.Enabled = false;
@@ -424,6 +427,9 @@ namespace Kursovaya
             {
                 panel1.Visible = false;
             }
+            button_enabled(false);
+            await debrov("У вас есть право на ошибку!");
+            button_enabled(true);
         }
         private async Task zall_process()
         {
@@ -444,15 +450,17 @@ namespace Kursovaya
             label6.Visible = true; label7.Visible = true; label8.Visible = true; label9.Visible = true;
             label10.Visible = true; label11.Visible = true; label12.Visible = true; label13.Visible = true;
         }
-        private void button_zall_Click(object sender, EventArgs e)
+        private async void button_zall_Click(object sender, EventArgs e)
         {
-            debrov("Будем надеяться на помощь зала!");
             button_call.Enabled = false;
             button_x2.Enabled = false;
             button_zall.Enabled = false;
             button_50na50.Enabled = false;
             sms.Play();
             zall_process();
+            button_enabled(false);
+            await debrov("Будем надеяться на помощь зала!");
+            button_enabled(true);
             if (label4.Visible == true)
             {
                 label4.Visible = false;
@@ -758,7 +766,7 @@ namespace Kursovaya
         {
             debrov_text.Text = Message;
             debrov_text.Show();
-            for(int i = 0;  i < 20; i++)
+            for(int i = 0;  i < 15; i++)
             {
                 vedushiy.Image = Resources.rot_false;
                 await Task.Delay(TimeSpan.FromSeconds(0.1));
