@@ -36,8 +36,8 @@ namespace Kursovaya
                 MessageBox.Show("Ошибка подключения к базе данных", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
-        
+
+
         Point lastPoint;
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {

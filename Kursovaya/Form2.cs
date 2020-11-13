@@ -19,31 +19,27 @@ using System.Windows.Forms.VisualStyles;
 
 namespace Kursovaya
 {
-
     public partial class Form2 : Form
     {
-        Point lastPoint;
-        Random rnd = new Random();
-        BD bd = new BD();
-        int current_question = 0; 
-        int balans = 0;
-        List<string[]> data = new List<string[]>();
-        SoundPlayer start_game;
-        SoundPlayer otvet;
-        SoundPlayer false_answer;
-        SoundPlayer on50;
-        SoundPlayer sms;
-        SoundPlayer true_answer;
-        SoundPlayer phone;
-        SoundPlayer win;
+        private Balance balance = new Balance();
+        private Point lastPoint;
+        private Random rnd = new Random();
+        private BD bd = new BD();
+        private int current_question = 0; 
+        private List<string[]> data = new List<string[]>();
+        private SoundPlayer start_game;
+        private SoundPlayer otvet;
+        private SoundPlayer false_answer;
+        private SoundPlayer on50;
+        private SoundPlayer sms;
+        private SoundPlayer true_answer;
+        private SoundPlayer phone;
+        private SoundPlayer win;
 
         public Form2()
         {
             InitializeComponent();
-            game_sound();
-            label2.Text = "Несгораемая сумма: " + data_program.summa_nesgor;
             bd.OpenConnection();
-            DataTable table = new DataTable();
             MySqlCommand command = new MySqlCommand("SELECT * FROM game_data WHERE Name = @N", bd.getConnection());
             command.Parameters.Add("@N", MySqlDbType.VarChar).Value = data_program.game_name;
             MySqlDataReader reader = command.ExecuteReader();
@@ -60,9 +56,16 @@ namespace Kursovaya
                 data[data.Count - 1][6] = reader[6].ToString();
             }
             reader.Close();
-            first_quest();
+            InitializeGame();
         }
-        private async Task first_quest()
+        private void InitializeGame()
+        {
+            balance.get_argument(label3);
+            initialize_sound();
+            label2.Text = "Несгораемая сумма: " + data_program.summa_nesgor;
+            game_start();
+        }
+        private async Task game_start()
         {
             start_game.Play();
             debrov("Добро пожаловать в игру!");
@@ -101,7 +104,7 @@ namespace Kursovaya
                 {
                     green_button(but, false);
                     await Task.Delay(TimeSpan.FromSeconds(2));
-                    game_Update();
+                    balance.Upd();
                     button_enabled(true);
                     good_finish();
                 }
@@ -119,7 +122,7 @@ namespace Kursovaya
                         x2_active.Visible = false;
                     }
                     label1.Text = "Вопрос " + (current_question + 1) + " / 15";
-                    game_Update();
+                    balance.Upd();
                     button_question.Text = data[current_question][1];
                     button_enabled(false);
                     await Task.Delay(TimeSpan.FromSeconds(1));
@@ -535,73 +538,9 @@ namespace Kursovaya
                 label12.Text = "думает " + x4.ToString() + "% людей";
             }
         }
-        private void game_Update()
-        {
-            if(balans==0)
-            {
-                balans = 500;
-            }
-            else if(balans == 500)
-            {
-                balans = 1000;
-            }
-            else if(balans==1000)
-            {
-                balans = 2000;
-            }
-            else if (balans == 2000)
-            {
-                balans = 3000;
-            }
-            else if (balans == 3000)
-            {
-                balans = 5000;
-            }
-            else if(balans == 5000)
-            {
-                balans = 10000;
-            }
-            else if (balans == 10000)
-            {
-                balans = 15000;
-            }
-            else if(balans == 15000)
-            {
-                balans = 25000;
-            }
-            else if (balans == 25000)
-            {
-                balans = 50000;
-            }
-            else if (balans == 50000)
-            {
-                balans = 100000;
-            }
-            else if (balans == 100000)
-            {
-                balans = 200000;
-            }
-            else if (balans == 200000)
-            {
-                balans = 400000;
-            }
-            else if (balans == 400000)
-            {
-                balans = 800000;
-            }
-            else if (balans == 800000)
-            {
-                balans = 1500000;
-            }
-            else if (balans == 1500000)
-            {
-                balans = 3000000;
-            }
-            label3.Text = "Баланс: " + balans.ToString();
-        }
         private void good_finish()
         {
-            if (balans > data_program.summa_nesgor)
+            if (balance.balanceCurrent > data_program.summa_nesgor)
             {
                 data_program.Message[0] = "Вы проиграли! Не огорчайтесь!";
                 data_program.Message[1] = data_program.game_name;
@@ -612,7 +551,7 @@ namespace Kursovaya
                 win.Play();
                 data_program.Message[0] = "Поздравляем, вы победили!";
                 data_program.Message[1] = data_program.game_name;
-                data_program.Message[2] = balans.ToString();
+                data_program.Message[2] = balance.balanceCurrent.ToString();
             }
             End FG = new End();
             FG.ShowDialog(this);
@@ -730,7 +669,7 @@ namespace Kursovaya
                 }
                 data_program.Message[0] = "Вы проиграли! Не огорчайтесь!";
                 data_program.Message[1] = data_program.game_name;
-                if (balans > data_program.summa_nesgor)
+                if (balance.balanceCurrent > data_program.summa_nesgor)
                 {
                     data_program.Message[2] = data_program.summa_nesgor.ToString();
                 }
@@ -742,7 +681,7 @@ namespace Kursovaya
                 FG.ShowDialog(this);
             }
         }
-        private void game_sound()
+        private void initialize_sound()
         {
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             System.IO.Stream resourceStream_start = assembly.GetManifestResourceStream(@"Kursovaya.start_game.wav");
@@ -774,6 +713,23 @@ namespace Kursovaya
                 await Task.Delay(TimeSpan.FromSeconds(0.1));
             }
             debrov_text.Hide();
+        }
+    }
+    public class Balance
+    {
+        public int balanceCurrent;
+        List<int> balance = new List<int>() { 0, 500, 1000, 2000, 3000, 5000, 10000, 15000, 25000, 50000, 100000, 200000, 400000, 800000, 1500000, 3000000 };
+        int metka = 0;
+        System.Windows.Forms.Label Argument = new System.Windows.Forms.Label();
+        public void Upd()
+        {
+            metka++;
+            balanceCurrent = balance[metka];
+            Argument.Text = "Баланс: " + balanceCurrent.ToString();
+        }
+        public void get_argument(System.Windows.Forms.Label LBL)
+        {
+            Argument = LBL;
         }
     }
 }

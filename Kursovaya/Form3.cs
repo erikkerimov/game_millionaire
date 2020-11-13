@@ -16,7 +16,6 @@ namespace Kursovaya
     {
         // ДЛЯ БАЗЫ ДАННЫХ
         BD bd = new BD();
-        MySqlDataAdapter adapter = new MySqlDataAdapter();
         public Form3()
         {
             InitializeComponent();
