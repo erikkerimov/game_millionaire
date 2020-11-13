@@ -23,7 +23,6 @@ namespace Kursovaya
     {
         private FormSettings FS = new FormSettings();
         private Balance balance = new Balance();
-        private Point lastPoint;
         private Random rnd = new Random();
         private BD bd = new BD();
         private int current_question = 0; 
@@ -81,16 +80,16 @@ namespace Kursovaya
             await Task.Delay(TimeSpan.FromSeconds(1));
             button_D.Text = data[0][5];
             button_enabled(true);
-        } // ОБРАБОТКА ПЕРВОГО ВОПРОСА
-        private void Form2_MouseMove(object sender, MouseEventArgs e)
+        }
+        private void Form2_MouseMove(object sender, MouseEventArgs e) // FOR MOVING FORM
         {
             FS.window_movement_move(this, e);
         } 
-        private void Form2_MouseDown(object sender, MouseEventArgs e)
+        private void Form2_MouseDown(object sender, MouseEventArgs e) // FOR MOVING FORM
         {
             FS.window_movement_down(this, e);
         } 
-        private async Task Continuation(Button but)
+        private async Task Continuation(Button but) // Processing the response
         {
             if (but.Text == data[current_question][6])
             {
@@ -140,7 +139,7 @@ namespace Kursovaya
                 game_over(true_b, but);
             }
         }
-        private async void next_quest(object sender, EventArgs e) // СОБЫТИЕ КЛИКА ПО КНОПКЕ
+        private async void next_quest(object sender, EventArgs e) // response
         {
             otvet.Play();
             Button but = sender as Button;
@@ -168,7 +167,7 @@ namespace Kursovaya
             await debrov("Внимание...");
             Continuation(but);
         }
-        private void button_enabled(bool enable) // ОТКЛЮЧЕНИЕ ВСЕХ КНОПОК ВО ВРЕМЯ ПРОВЕРКИ ПРАВИЛЬНОСТИ ВОПРОСА
+        private void button_enabled(bool enable)
         {
             if (enable == false)
             {
@@ -189,7 +188,7 @@ namespace Kursovaya
             button_x2.Enabled = enable;
             button_call.Enabled = enable;
         }
-        private void button_reset(Button but) // РЕСЕТ  ЦВЕТА КНОПКИ И ФОНА
+        private void button_reset(Button but)
         {
             but.BackColor = ColorTranslator.FromHtml("#180246");
             but.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#180246");
@@ -210,7 +209,7 @@ namespace Kursovaya
                 pictureBox4.Visible = false;
             }
         }
-        private Button checked_true_button(string quest) // ПРОВЕРКА В КАКОЙ КНОПКЕ ПРАВИЛЬНЫЙ ОТВЕТ
+        private Button checked_true_button(string quest)
         {
             Button true_button = new Button();
             if(button_A.Text == quest)
@@ -231,7 +230,7 @@ namespace Kursovaya
             }
             return true_button;
         }
-        private async Task green_button(Button but, bool game_over) // ОКРАС КНОПКИ В ЗЕЛЕНЫЙ ЦВЕТ
+        private async Task green_button(Button but, bool game_over)
         {
             but.BackColor = ColorTranslator.FromHtml("#08ac00");
             but.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#08ac00");
@@ -259,11 +258,11 @@ namespace Kursovaya
                 
             }
         }
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pictureBox2_Click(object sender, EventArgs e) // close programm
         {
             Application.Exit();
         } 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void pictureBox3_Click(object sender, EventArgs e) // folding
         {
             FS.folding(this);
         }
@@ -677,8 +676,29 @@ namespace Kursovaya
             }
             debrov_text.Hide();
         }
+
+        private void picture_money_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Вы действительно хотите забрать деньги?",
+                "Забрать деньги",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1,
+                MessageBoxOptions.DefaultDesktopOnly);
+
+            if (result == DialogResult.Yes)
+            {
+                win.Play();
+                data_program.Message[0] = "Вы забрали деньги!";
+                data_program.Message[1] = data_program.game_name;
+                data_program.Message[2] = balance.balanceCurrent.ToString();
+                End FG = new End();
+                FG.ShowDialog(this);
+            }
+        }
     }
-    public class Balance
+    public class Balance 
     {
         public int balanceCurrent;
         List<int> balance = new List<int>() { 0, 500, 1000, 2000, 3000, 5000, 10000, 15000, 25000, 50000, 100000, 200000, 400000, 800000, 1500000, 3000000 };

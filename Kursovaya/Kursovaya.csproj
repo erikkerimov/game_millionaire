@@ -301,5 +301,11 @@
   <ItemGroup>
     <None Include="Resources\oblako.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\business-color_money-13_icon-icons.com_53448.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pictures\getmoney.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

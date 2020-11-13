@@ -51,6 +51,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.debrov_text = new System.Windows.Forms.Button();
+            this.picture_money = new System.Windows.Forms.PictureBox();
+            this.vedushiy = new System.Windows.Forms.PictureBox();
             this.x2_active = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -61,9 +64,9 @@
             this.button_zall = new System.Windows.Forms.PictureBox();
             this.button_call = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.vedushiy = new System.Windows.Forms.PictureBox();
-            this.debrov_text = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picture_money)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vedushiy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.x2_active)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -74,7 +77,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.button_zall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.button_call)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vedushiy)).BeginInit();
             this.SuspendLayout();
             // 
             // button_A
@@ -373,6 +375,45 @@
             this.label6.Text = "A:";
             this.label6.Visible = false;
             // 
+            // debrov_text
+            // 
+            this.debrov_text.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.debrov_text.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.debrov_text.FlatAppearance.BorderSize = 0;
+            this.debrov_text.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.debrov_text.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.debrov_text.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.debrov_text.Font = new System.Drawing.Font("Century Gothic", 11.25F);
+            this.debrov_text.ForeColor = System.Drawing.SystemColors.Window;
+            this.debrov_text.Location = new System.Drawing.Point(568, 92);
+            this.debrov_text.Name = "debrov_text";
+            this.debrov_text.Size = new System.Drawing.Size(197, 53);
+            this.debrov_text.TabIndex = 31;
+            this.debrov_text.UseVisualStyleBackColor = false;
+            // 
+            // picture_money
+            // 
+            this.picture_money.BackColor = System.Drawing.Color.Transparent;
+            this.picture_money.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picture_money.Image = global::Kursovaya.Properties.Resources.getmoney;
+            this.picture_money.Location = new System.Drawing.Point(725, 37);
+            this.picture_money.Name = "picture_money";
+            this.picture_money.Size = new System.Drawing.Size(83, 61);
+            this.picture_money.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picture_money.TabIndex = 32;
+            this.picture_money.TabStop = false;
+            this.picture_money.Click += new System.EventHandler(this.picture_money_Click);
+            // 
+            // vedushiy
+            // 
+            this.vedushiy.Image = global::Kursovaya.Properties.Resources.rot_true;
+            this.vedushiy.Location = new System.Drawing.Point(557, 137);
+            this.vedushiy.Name = "vedushiy";
+            this.vedushiy.Size = new System.Drawing.Size(231, 249);
+            this.vedushiy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.vedushiy.TabIndex = 30;
+            this.vedushiy.TabStop = false;
+            // 
             // x2_active
             // 
             this.x2_active.BackColor = System.Drawing.Color.Transparent;
@@ -494,38 +535,13 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // vedushiy
-            // 
-            this.vedushiy.Image = global::Kursovaya.Properties.Resources.rot_true;
-            this.vedushiy.Location = new System.Drawing.Point(557, 137);
-            this.vedushiy.Name = "vedushiy";
-            this.vedushiy.Size = new System.Drawing.Size(231, 249);
-            this.vedushiy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.vedushiy.TabIndex = 30;
-            this.vedushiy.TabStop = false;
-            // 
-            // debrov_text
-            // 
-            this.debrov_text.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
-            this.debrov_text.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.debrov_text.FlatAppearance.BorderSize = 0;
-            this.debrov_text.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
-            this.debrov_text.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
-            this.debrov_text.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.debrov_text.Font = new System.Drawing.Font("Century Gothic", 11.25F);
-            this.debrov_text.ForeColor = System.Drawing.SystemColors.Window;
-            this.debrov_text.Location = new System.Drawing.Point(568, 92);
-            this.debrov_text.Name = "debrov_text";
-            this.debrov_text.Size = new System.Drawing.Size(197, 53);
-            this.debrov_text.TabIndex = 31;
-            this.debrov_text.UseVisualStyleBackColor = false;
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.ClientSize = new System.Drawing.Size(800, 555);
+            this.Controls.Add(this.picture_money);
             this.Controls.Add(this.debrov_text);
             this.Controls.Add(this.vedushiy);
             this.Controls.Add(this.panel1);
@@ -558,6 +574,8 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseMove);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picture_money)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vedushiy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.x2_active)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -568,7 +586,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.button_zall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.button_call)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vedushiy)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -610,5 +627,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.PictureBox vedushiy;
         private System.Windows.Forms.Button debrov_text;
+        private System.Windows.Forms.PictureBox picture_money;
     }
 }
