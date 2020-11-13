@@ -12,6 +12,7 @@ namespace Kursovaya
 {
     public partial class End : Form
     {
+        FormSettings FS = new FormSettings();
         public End()
         {
             InitializeComponent();
@@ -38,12 +39,22 @@ namespace Kursovaya
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            FS.folding(this);
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void End_MouseMove(object sender, MouseEventArgs e)
+        {
+            FS.window_movement_move(this, e);
+        }
+
+        private void End_MouseDown(object sender, MouseEventArgs e)
+        {
+            FS.window_movement_down(this, e);
         }
     }
 }

@@ -15,8 +15,8 @@ namespace Kursovaya
 {
     public partial class Form6 : Form
     {
+        private FormSettings FS = new FormSettings();
         Form4 F4;
-        // ДЛЯ БАЗЫ ДАННЫХ
         BD bd = new BD();
         MySqlDataAdapter adapter = new MySqlDataAdapter();
         public Form6()
@@ -79,7 +79,7 @@ namespace Kursovaya
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            FS.folding(this);
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -109,6 +109,16 @@ namespace Kursovaya
                 comboBox1.Items.Add(s[0]);
             }
             bd.CloseConnection();
+        }
+
+        private void Form6_MouseMove(object sender, MouseEventArgs e)
+        {
+            FS.window_movement_move(this, e);
+        }
+
+        private void Form6_MouseDown(object sender, MouseEventArgs e)
+        {
+            FS.window_movement_down(this, e);
         }
     }
 }

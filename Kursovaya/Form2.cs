@@ -21,6 +21,7 @@ namespace Kursovaya
 {
     public partial class Form2 : Form
     {
+        private FormSettings FS = new FormSettings();
         private Balance balance = new Balance();
         private Point lastPoint;
         private Random rnd = new Random();
@@ -83,19 +84,14 @@ namespace Kursovaya
         } // ОБРАБОТКА ПЕРВОГО ВОПРОСА
         private void Form2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                this.Left += e.X - lastPoint.X;
-                this.Top += e.Y - lastPoint.Y;
-            }
-        } // ФУНКЦИЯ ДВИЖЕНИЯ ОКНА
+            FS.window_movement_move(this, e);
+        } 
         private void Form2_MouseDown(object sender, MouseEventArgs e)
         {
-            lastPoint = new Point(e.X, e.Y);
-        } // ФУНКЦИЯ ДВИЖЕНИЯ ОКНА
-        private async Task Continuation(Button but) // ПРОДОЛЖЕНИЕ ЛОГИКИ ПОСЛЕ МЕТОДА NEXT_QUEST
+            FS.window_movement_down(this, e);
+        } 
+        private async Task Continuation(Button but)
         {
-            //await Task.Delay(TimeSpan.FromSeconds(4));
             if (but.Text == data[current_question][6])
             {
 
@@ -266,11 +262,11 @@ namespace Kursovaya
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }  // КНОПКА ВЫХОДА
+        } 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
-        } // КНОПКА СВОРАЧИВАНИЯ
+            FS.folding(this);
+        }
         private async void button_50na50_Click(object sender, EventArgs e)
         {
             button_call.Enabled = false;
@@ -576,23 +572,14 @@ namespace Kursovaya
                     if (select_button == button_B)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_a_true_b_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_C)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_a_true_c_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_D)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_a_true_d_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                 }
                 if (true_button == button_B)
@@ -600,23 +587,14 @@ namespace Kursovaya
                     if (select_button == button_A)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_b_true_a_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_C)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_b_true_c_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_D)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_b_true_d_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                 }
                 if (true_button == button_C)
@@ -624,23 +602,14 @@ namespace Kursovaya
                     if (select_button == button_A)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_c_true_a_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_B)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_c_true_b_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_D)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_c_true_d_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                 }
                 if (true_button == button_D)
@@ -648,25 +617,19 @@ namespace Kursovaya
                     if (select_button == button_A)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_d_true_a_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_B)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_d_true_b_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                     if (select_button == button_C)
                     {
                         pictureBox1.Image = Game_Pict.game_cap_select_d_true_c_false;
-                        select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
-                        select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                     }
                 }
+                select_button.BackColor = ColorTranslator.FromHtml("#ff0000");
+                select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#ff0000");
+                select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                 data_program.Message[0] = "Вы проиграли! Не огорчайтесь!";
                 data_program.Message[1] = data_program.game_name;
                 if (balance.balanceCurrent > data_program.summa_nesgor)
@@ -705,7 +668,7 @@ namespace Kursovaya
         {
             debrov_text.Text = Message;
             debrov_text.Show();
-            for(int i = 0;  i < 15; i++)
+            for(int i = 0;  i < 10; i++)
             {
                 vedushiy.Image = Resources.rot_false;
                 await Task.Delay(TimeSpan.FromSeconds(0.1));

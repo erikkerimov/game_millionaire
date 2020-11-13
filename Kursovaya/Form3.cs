@@ -15,7 +15,8 @@ namespace Kursovaya
     public partial class Form3 : Form
     {
         // ДЛЯ БАЗЫ ДАННЫХ
-        BD bd = new BD();
+        private BD bd = new BD();
+        private FormSettings FS = new FormSettings();
         public Form3()
         {
             InitializeComponent();
@@ -46,7 +47,7 @@ namespace Kursovaya
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            FS.folding(this);
         }
 
         private void button_game_Click(object sender, EventArgs e)
@@ -67,16 +68,12 @@ namespace Kursovaya
         Point lastPoint;
         private void Form3_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                this.Left += e.X - lastPoint.X;
-                this.Top += e.Y - lastPoint.Y;
-            }
+            FS.window_movement_move(this, e);
         }
 
         private void Form3_MouseDown(object sender, MouseEventArgs e)
         {
-            lastPoint = new Point(e.X, e.Y);
+            FS.window_movement_down(this, e);
         }
 
     }

@@ -94,6 +94,7 @@
     <Compile Include="Form6.Designer.cs">
       <DependentUpon>Form6.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSettings.cs" />
     <Compile Include="Game_Pict.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

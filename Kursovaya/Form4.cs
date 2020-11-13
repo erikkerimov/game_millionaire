@@ -14,17 +14,15 @@ namespace Kursovaya
 {
     public partial class Form4 : Form
     {
-        // ДЛЯ БАЗЫ ДАННЫХ
-        BD bd = new BD();
-        MySqlDataAdapter adapter = new MySqlDataAdapter();
+        private BD bd = new BD();
+        private MySqlDataAdapter adapter = new MySqlDataAdapter();
+        private FormSettings FS = new FormSettings();
 
         //ПЕРЕМЕННЫЕ
-        int count = 1;
+        private int count = 1;
         public string game_name;
-        string true_answer;
-        string slochnost = "Легкий";
-        Point lastPoint;
-
+        private string true_answer;
+        private string slochnost = "Легкий";
 
         public Form4()
         {
@@ -176,21 +174,17 @@ namespace Kursovaya
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            FS.folding(this);
         }
 
         private void Form4_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                this.Left += e.X - lastPoint.X;
-                this.Top += e.Y - lastPoint.Y;
-            }
+            FS.window_movement_move(this, e);
         }
 
         private void Form4_MouseDown(object sender, MouseEventArgs e)
         {
-            lastPoint = new Point(e.X, e.Y);
+            FS.window_movement_down(this, e);
         }
 
         private void Form4_FormClosing(object sender, FormClosingEventArgs e)

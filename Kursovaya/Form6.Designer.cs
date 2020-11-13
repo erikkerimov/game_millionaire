@@ -120,6 +120,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form6";
             this.Load += new System.EventHandler(this.Form6_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form6_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form6_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);

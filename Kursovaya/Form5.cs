@@ -12,25 +12,21 @@ namespace Kursovaya
 {
     public partial class Form5 : Form
     {
-
-        Point lastPoint;
-        private void Form5_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                this.Left += e.X - lastPoint.X;
-                this.Top += e.Y - lastPoint.Y;
-            }
-        }
-
-        private void Form5_MouseDown(object sender, MouseEventArgs e)
-        {
-            lastPoint = new Point(e.X, e.Y);
-        }
+        private FormSettings FS = new FormSettings();       
         public Form5()
         {
             InitializeComponent();
         }
+        private void Form5_MouseMove(object sender, MouseEventArgs e)
+        {
+            FS.window_movement_move(this, e);
+        }
+
+        private void Form5_MouseDown(object sender, MouseEventArgs e)
+        {
+            FS.window_movement_down(this, e);
+        }
+
 
         private void button_game_Click(object sender, EventArgs e)
         {
@@ -102,7 +98,7 @@ namespace Kursovaya
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            FS.folding(this);
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
