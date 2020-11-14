@@ -535,7 +535,7 @@ namespace Kursovaya
         }
         private void good_finish()
         {
-            if (balance.balanceCurrent > data_program.summa_nesgor)
+            if (balance.balanceCurrent >= data_program.summa_nesgor)
             {
                 data_program.Message[0] = "Вы проиграли! Не огорчайтесь!";
                 data_program.Message[1] = data_program.game_name;

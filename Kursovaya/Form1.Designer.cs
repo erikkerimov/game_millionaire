@@ -34,7 +34,6 @@
             this.button_make = new System.Windows.Forms.Button();
             this.button_game = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.btn_focus = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -117,25 +116,6 @@
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
-            // button1
-            // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(66)))), ((int)(((byte)(77)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.Location = new System.Drawing.Point(672, 466);
-            this.button1.Name = "button1";
-            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button1.Size = new System.Drawing.Size(100, 77);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Почистить";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // btn_focus
             // 
             this.btn_focus.Location = new System.Drawing.Point(517, 277);
@@ -156,7 +136,6 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button_make);
             this.Controls.Add(this.button_game);
-            this.Controls.Add(this.button1);
             this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -178,7 +157,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_focus;
     }
 }

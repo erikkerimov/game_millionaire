@@ -74,23 +74,5 @@ namespace Kursovaya
         {
             Application.Exit();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            BD bd = new BD();
-            DataTable table = new DataTable();
-            try
-            {
-                bd.OpenConnection();
-
-                MySqlCommand command2 = new MySqlCommand("TRUNCATE TABLE `game_data`", bd.getConnection());
-                command2.ExecuteNonQuery();
-                bd.CloseConnection();
-            }
-            catch
-            {
-                MessageBox.Show("Ошибка подключения к базе данных", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
     }
 }
