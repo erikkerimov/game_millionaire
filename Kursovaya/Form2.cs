@@ -679,22 +679,25 @@ namespace Kursovaya
 
         private void picture_money_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-                "Вы действительно хотите забрать деньги?",
-                "Забрать деньги",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1,
-                MessageBoxOptions.DefaultDesktopOnly);
-
-            if (result == DialogResult.Yes)
+            if (debrov_text.Visible == false)
             {
-                win.Play();
-                data_program.Message[0] = "Вы забрали деньги!";
-                data_program.Message[1] = data_program.game_name;
-                data_program.Message[2] = balance.balanceCurrent.ToString();
-                End FG = new End();
-                FG.ShowDialog(this);
+                DialogResult result = MessageBox.Show(
+                    "Вы действительно хотите забрать деньги?",
+                    "Забрать деньги",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly);
+
+                if (result == DialogResult.Yes)
+                {
+                    win.Play();
+                    data_program.Message[0] = "Вы забрали деньги!";
+                    data_program.Message[1] = data_program.game_name;
+                    data_program.Message[2] = balance.balanceCurrent.ToString();
+                    End FG = new End();
+                    FG.ShowDialog(this);
+                }
             }
         }
     }

@@ -16,16 +16,21 @@ namespace Kursovaya
         public End()
         {
             InitializeComponent();
-            label1.Text = data_program.Message[0];
+            InitializeForm();
+
+        }
+        private void InitializeForm()
+        {
+            Message.Text = data_program.Message[0];
             label2.Text += " " + data_program.Message[1];
             label3.Text += " " + data_program.Message[2];
             if (data_program.Message[0] == "Вы проиграли! Не огорчайтесь!")
             {
-                label1.ForeColor = ColorTranslator.FromHtml("#ff0000");
+                Message.ForeColor = ColorTranslator.FromHtml("#ff0000");
             }
             if (data_program.Message[0] == "Поздравляем, вы победили!")
             {
-                label1.ForeColor = ColorTranslator.FromHtml("#00ff45");
+                Message.ForeColor = ColorTranslator.FromHtml("#00ff45");
             }
         }
 

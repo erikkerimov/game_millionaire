@@ -34,7 +34,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.Message = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -106,16 +106,21 @@
             this.label2.TabIndex = 26;
             this.label2.Text = "Название игры:";
             // 
-            // label1
+            // Message
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(137, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(351, 28);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Поздравляем, вы победили!";
+            this.Message.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.Message.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Message.FlatAppearance.BorderSize = 0;
+            this.Message.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.Message.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.Message.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Message.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Message.ForeColor = System.Drawing.SystemColors.Window;
+            this.Message.Location = new System.Drawing.Point(81, 0);
+            this.Message.Name = "Message";
+            this.Message.Size = new System.Drawing.Size(477, 42);
+            this.Message.TabIndex = 31;
+            this.Message.UseVisualStyleBackColor = false;
             // 
             // End
             // 
@@ -128,8 +133,9 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Message);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "End";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "End";
@@ -149,6 +155,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button Message;
     }
 }

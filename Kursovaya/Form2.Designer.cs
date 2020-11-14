@@ -385,9 +385,9 @@
             this.debrov_text.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.debrov_text.Font = new System.Drawing.Font("Century Gothic", 11.25F);
             this.debrov_text.ForeColor = System.Drawing.SystemColors.Window;
-            this.debrov_text.Location = new System.Drawing.Point(568, 92);
+            this.debrov_text.Location = new System.Drawing.Point(568, 90);
             this.debrov_text.Name = "debrov_text";
-            this.debrov_text.Size = new System.Drawing.Size(197, 53);
+            this.debrov_text.Size = new System.Drawing.Size(197, 55);
             this.debrov_text.TabIndex = 31;
             this.debrov_text.UseVisualStyleBackColor = false;
             // 
@@ -396,9 +396,9 @@
             this.picture_money.BackColor = System.Drawing.Color.Transparent;
             this.picture_money.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picture_money.Image = global::Kursovaya.Properties.Resources.getmoney;
-            this.picture_money.Location = new System.Drawing.Point(725, 37);
+            this.picture_money.Location = new System.Drawing.Point(722, 40);
             this.picture_money.Name = "picture_money";
-            this.picture_money.Size = new System.Drawing.Size(83, 61);
+            this.picture_money.Size = new System.Drawing.Size(83, 52);
             this.picture_money.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picture_money.TabIndex = 32;
             this.picture_money.TabStop = false;
@@ -567,6 +567,7 @@
             this.Controls.Add(this.button_A);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
