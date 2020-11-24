@@ -64,6 +64,7 @@
             this.button_zall = new System.Windows.Forms.PictureBox();
             this.button_call = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_volume = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picture_money)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vedushiy)).BeginInit();
@@ -77,6 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.button_zall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.button_call)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_volume)).BeginInit();
             this.SuspendLayout();
             // 
             // button_A
@@ -535,12 +537,25 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // pictureBox_volume
+            // 
+            this.pictureBox_volume.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox_volume.Image = global::Kursovaya.Game_Pict.volume_on;
+            this.pictureBox_volume.Location = new System.Drawing.Point(678, 0);
+            this.pictureBox_volume.Name = "pictureBox_volume";
+            this.pictureBox_volume.Size = new System.Drawing.Size(52, 35);
+            this.pictureBox_volume.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_volume.TabIndex = 33;
+            this.pictureBox_volume.TabStop = false;
+            this.pictureBox_volume.Click += new System.EventHandler(this.pictureBox_volume_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.ClientSize = new System.Drawing.Size(800, 555);
+            this.Controls.Add(this.pictureBox_volume);
             this.Controls.Add(this.picture_money);
             this.Controls.Add(this.debrov_text);
             this.Controls.Add(this.vedushiy);
@@ -587,6 +602,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.button_zall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.button_call)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_volume)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -629,5 +645,6 @@
         private System.Windows.Forms.PictureBox vedushiy;
         private System.Windows.Forms.Button debrov_text;
         private System.Windows.Forms.PictureBox picture_money;
+        private System.Windows.Forms.PictureBox pictureBox_volume;
     }
 }

@@ -23,6 +23,7 @@ namespace Kursovaya
             System.IO.Stream resourceStream_track = assembly.GetManifestResourceStream(@"Kursovaya.soundtrack.wav");
             soundtrack = new SoundPlayer(resourceStream_track);
             soundtrack.PlayLooping();
+
         }
 
         private void button_game_Click(object sender, EventArgs e)
@@ -73,6 +74,22 @@ namespace Kursovaya
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void pictureBox_volume_Click(object sender, EventArgs e)
+        {
+            if(data_program.volume==true)
+            {
+                pictureBox_volume.Image = Game_Pict.volume_off;
+                data_program.volume = false;
+                soundtrack.Stop();
+            }
+            else
+            {
+                pictureBox_volume.Image = Game_Pict.volume_on;
+                data_program.volume = true;
+                soundtrack.PlayLooping();
+            }
         }
     }
 }

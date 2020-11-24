@@ -12,5 +12,6 @@ namespace Kursovaya
         public static int summa_nesgor;
         public static string slochnost_tmp;
         public static string[] Message = new string[3];
+        public static bool volume = true;
     }
 }

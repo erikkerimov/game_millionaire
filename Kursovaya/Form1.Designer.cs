@@ -29,16 +29,51 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.btn_focus = new System.Windows.Forms.Button();
+            this.pictureBox_volume = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button_make = new System.Windows.Forms.Button();
             this.button_game = new System.Windows.Forms.Button();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.btn_focus = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_volume)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
+            // 
+            // btn_focus
+            // 
+            this.btn_focus.Location = new System.Drawing.Point(517, 277);
+            this.btn_focus.Name = "btn_focus";
+            this.btn_focus.Size = new System.Drawing.Size(0, 0);
+            this.btn_focus.TabIndex = 1;
+            this.btn_focus.Text = "btn_focus";
+            this.btn_focus.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox_volume
+            // 
+            this.pictureBox_volume.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox_volume.Image = global::Kursovaya.Game_Pict.volume_on;
+            this.pictureBox_volume.Location = new System.Drawing.Point(729, 39);
+            this.pictureBox_volume.Name = "pictureBox_volume";
+            this.pictureBox_volume.Size = new System.Drawing.Size(76, 56);
+            this.pictureBox_volume.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_volume.TabIndex = 6;
+            this.pictureBox_volume.TabStop = false;
+            this.pictureBox_volume.Click += new System.EventHandler(this.pictureBox_volume_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(736, 0);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(36, 33);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 5;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
             // pictureBox2
             // 
@@ -104,32 +139,12 @@
             this.button_game.UseVisualStyleBackColor = true;
             this.button_game.Click += new System.EventHandler(this.button_game_Click);
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(736, 0);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(36, 33);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 5;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
-            // btn_focus
-            // 
-            this.btn_focus.Location = new System.Drawing.Point(517, 277);
-            this.btn_focus.Name = "btn_focus";
-            this.btn_focus.Size = new System.Drawing.Size(0, 0);
-            this.btn_focus.TabIndex = 1;
-            this.btn_focus.Text = "btn_focus";
-            this.btn_focus.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.ClientSize = new System.Drawing.Size(800, 555);
+            this.Controls.Add(this.pictureBox_volume);
             this.Controls.Add(this.btn_focus);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
@@ -144,9 +159,10 @@
             this.Text = "Form1";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_volume)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -158,6 +174,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button btn_focus;
+        private System.Windows.Forms.PictureBox pictureBox_volume;
     }
 }
 

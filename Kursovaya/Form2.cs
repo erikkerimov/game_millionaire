@@ -21,6 +21,7 @@ namespace Kursovaya
 {
     public partial class Form2 : Form
     {
+        _Sound Sound = new _Sound();
         private FormSettings FS = new FormSettings();
         private Balance balance = new Balance();
         private Random rnd = new Random();
@@ -67,7 +68,7 @@ namespace Kursovaya
         }
         private async Task game_start()
         {
-            start_game.Play();
+            Sound.SoundProccesing(start_game);
             debrov("Добро пожаловать в игру!");
             button_enabled(false);
             button_question.Text = data[0][1];
@@ -134,14 +135,14 @@ namespace Kursovaya
             else
             {
                 debrov("К сожалению игра закончена, мне жаль!");
-                false_answer.Play();
+                Sound.SoundProccesing(false_answer);
                 Button true_b = checked_true_button(data[current_question][6]);
                 game_over(true_b, but);
             }
         }
         private async void next_quest(object sender, EventArgs e) // response
         {
-            otvet.Play();
+            Sound.SoundProccesing(otvet);
             Button but = sender as Button;
             btn_focus.Focus();
             but.BackColor = ColorTranslator.FromHtml("#a46400");
@@ -252,8 +253,8 @@ namespace Kursovaya
                 pictureBox1.Image = Game_Pict.game_cap_select_d_true;
             }
             if (game_over == false)
-            {   
-                true_answer.Play();
+            {
+                Sound.SoundProccesing(true_answer);
                 await debrov("Это правильный ответ!");
                 
             }
@@ -268,11 +269,7 @@ namespace Kursovaya
         }
         private async void button_50na50_Click(object sender, EventArgs e)
         {
-            button_call.Enabled = false;
-            button_x2.Enabled = false;
-            button_zall.Enabled = false;
-            button_50na50.Enabled = false;
-            on50.Play();
+            Sound.SoundProccesing(on50);
             Button true_b = checked_true_button(data[current_question][6]);
             int true_c = 0;
             if(true_b==button_A)
@@ -351,15 +348,15 @@ namespace Kursovaya
             button_enabled(false);
             await debrov("Шансы 50 на 50!");
             button_enabled(true);
-        }
-        private async void button_call_Click(object sender, EventArgs e)
-        {
-            debrov("Надеюсь друг вас не подведет!");
             button_call.Enabled = false;
             button_x2.Enabled = false;
             button_zall.Enabled = false;
             button_50na50.Enabled = false;
-            phone.Play();
+        }
+        private async void button_call_Click(object sender, EventArgs e)
+        {
+            debrov("Надеюсь друг вас не подведет!");
+            Sound.SoundProccesing(phone);
             if (panel1.Visible == true)
             {
                 panel1.Visible = false;
@@ -406,14 +403,14 @@ namespace Kursovaya
                 label4.Text = "D";
             }
             button_enabled(true);
-        }
-        private async void button_x2_Click(object sender, EventArgs e)
-        {
-            on50.Play();
             button_call.Enabled = false;
             button_x2.Enabled = false;
             button_zall.Enabled = false;
             button_50na50.Enabled = false;
+        }
+        private async void button_x2_Click(object sender, EventArgs e)
+        {
+            Sound.SoundProccesing(on50);
             x2_active.Show();
             button_x2.Hide();
             if (label4.Visible == true)
@@ -428,6 +425,10 @@ namespace Kursovaya
             button_enabled(false);
             await debrov("У вас есть право на ошибку!");
             button_enabled(true);
+            button_call.Enabled = false;
+            button_x2.Enabled = false;
+            button_zall.Enabled = false;
+            button_50na50.Enabled = false;
         }
         private async Task zall_process()
         {
@@ -450,15 +451,15 @@ namespace Kursovaya
         }
         private async void button_zall_Click(object sender, EventArgs e)
         {
-            button_call.Enabled = false;
-            button_x2.Enabled = false;
-            button_zall.Enabled = false;
-            button_50na50.Enabled = false;
-            sms.Play();
+            Sound.SoundProccesing(sms);
             zall_process();
             button_enabled(false);
             await debrov("Будем надеяться на помощь зала!");
             button_enabled(true);
+            button_call.Enabled = false;
+            button_x2.Enabled = false;
+            button_zall.Enabled = false;
+            button_50na50.Enabled = false;
             if (label4.Visible == true)
             {
                 label4.Visible = false;
@@ -543,7 +544,7 @@ namespace Kursovaya
             }
             if (current_question == data.Count)
             {
-                win.Play();
+                Sound.SoundProccesing(win);
                 data_program.Message[0] = "Поздравляем, вы победили!";
                 data_program.Message[1] = data_program.game_name;
                 data_program.Message[2] = balance.balanceCurrent.ToString();
@@ -691,13 +692,27 @@ namespace Kursovaya
 
                 if (result == DialogResult.Yes)
                 {
-                    win.Play();
+                    Sound.SoundProccesing(win);
                     data_program.Message[0] = "Вы забрали деньги!";
                     data_program.Message[1] = data_program.game_name;
                     data_program.Message[2] = balance.balanceCurrent.ToString();
                     End FG = new End();
                     FG.ShowDialog(this);
                 }
+            }
+        }
+
+        private void pictureBox_volume_Click(object sender, EventArgs e)
+        {
+            if (data_program.volume == true)
+            {
+                pictureBox_volume.Image = Game_Pict.volume_off;
+                data_program.volume = false;
+            }
+            else
+            {
+                pictureBox_volume.Image = Game_Pict.volume_on;
+                data_program.volume = true;
             }
         }
     }
@@ -716,6 +731,16 @@ namespace Kursovaya
         public void get_argument(System.Windows.Forms.Label LBL)
         {
             Argument = LBL;
+        }
+    }
+    public class _Sound
+    {
+        public void SoundProccesing(SoundPlayer SP)
+        {
+            if(data_program.volume==true)
+            {
+                SP.Play();
+            }
         }
     }
 }
