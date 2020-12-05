@@ -22,7 +22,15 @@ namespace Kursovaya
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             System.IO.Stream resourceStream_track = assembly.GetManifestResourceStream(@"Kursovaya.soundtrack.wav");
             soundtrack = new SoundPlayer(resourceStream_track);
-            soundtrack.PlayLooping();
+            
+            if (data_program.volume == false)
+            {
+                pictureBox_volume.Image = Game_Pict.volume_off;
+            }
+            else
+            {
+                soundtrack.PlayLooping();
+            }
 
         }
 

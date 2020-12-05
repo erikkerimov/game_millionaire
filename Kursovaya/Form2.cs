@@ -61,6 +61,10 @@ namespace Kursovaya
         }
         private void InitializeGame()
         {
+            if(data_program.volume == false)
+            {
+                pictureBox_volume.Image = Game_Pict.volume_off;
+            }    
             balance.get_argument(label3);
             initialize_sound();
             label2.Text = "Несгораемая сумма: " + data_program.summa_nesgor;
@@ -134,8 +138,6 @@ namespace Kursovaya
             }
             else
             {
-                debrov("К сожалению игра закончена, мне жаль!");
-                Sound.SoundProccesing(false_answer);
                 Button true_b = checked_true_button(data[current_question][6]);
                 game_over(true_b, but);
             }
@@ -556,6 +558,8 @@ namespace Kursovaya
         {
             if (x2_active.Visible == true)
             {
+                Sound.SoundProccesing(on50);
+                debrov("У вас есть еще попытка!");
                 button_enabled(true);
                 select_button.BackColor = ColorTranslator.FromHtml("#180246");
                 select_button.FlatAppearance.MouseDownBackColor = ColorTranslator.FromHtml("#180246");
@@ -566,6 +570,8 @@ namespace Kursovaya
             }
             else
             {
+                Sound.SoundProccesing(false_answer);
+                debrov("К сожалению игра закончена, мне жаль!");
                 green_button(true_button, true);
                 if (true_button == button_A)
                 {
@@ -632,7 +638,7 @@ namespace Kursovaya
                 select_button.FlatAppearance.MouseOverBackColor = ColorTranslator.FromHtml("#ff0000");
                 data_program.Message[0] = "Вы проиграли! Не огорчайтесь!";
                 data_program.Message[1] = data_program.game_name;
-                if (balance.balanceCurrent > data_program.summa_nesgor)
+                if (balance.balanceCurrent >= data_program.summa_nesgor)
                 {
                     data_program.Message[2] = data_program.summa_nesgor.ToString();
                 }
@@ -706,6 +712,14 @@ namespace Kursovaya
         {
             if (data_program.volume == true)
             {
+                start_game.Stop();
+                otvet.Stop();
+                false_answer.Stop();
+                on50.Stop();
+                sms.Stop();
+                true_answer.Stop();
+                phone.Stop();
+                win.Stop();
                 pictureBox_volume.Image = Game_Pict.volume_off;
                 data_program.volume = false;
             }
